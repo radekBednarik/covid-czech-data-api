@@ -1,0 +1,22 @@
+{
+  "tasks": {
+    "dev": "deno run --watch index.ts"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1"
+  },
+  "lint": {
+    "include": ["src/"],
+    "exclude": ["test/"],
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "fmt": {
+    "lineWidth": 109,
+    "useTabs": true,
+    "semiColons": true,
+    "singleQuote": false,
+    "indentWidth": 2
+  }
+}
