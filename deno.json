@@ -23,5 +23,8 @@
     "semiColons": true,
     "singleQuote": false,
     "indentWidth": 2
+  },
+  "compilerOptions": {
+    "strict": true
   }
 }

@@ -40,3 +40,23 @@ export async function getApi(
         return [null, new Error(`Func getApi failed with error:\n${error}`)];
     }
 }
+
+export function createQueryParams(args: Record<string, string | number | undefined | string[]>) {
+    const queryParams = new URLSearchParams();
+
+    Object.entries(args).forEach((arg) => {
+        const [key, value] = arg;
+
+        if (typeof value !== "undefined") {
+            if (Array.isArray(value)) {
+                value.forEach((item) => {
+                    queryParams.append("properties", item.toString());
+                });
+            } else {
+                queryParams.append(key, value.toString());
+            }
+        }
+    });
+
+    return queryParams;
+}
