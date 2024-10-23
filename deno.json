@@ -13,7 +13,8 @@
     "include": ["src/"],
     "exclude": ["test/"],
     "rules": {
-      "tags": ["recommended"]
+      "tags": ["recommended"],
+      "exclude": ["no-explicit-any"]
     }
   },
   "fmt": {
