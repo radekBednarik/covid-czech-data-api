@@ -4,14 +4,14 @@ export type GetApiReturned = Promise<[any, null] | [null, Error]>;
 export async function getApi(
     endpoint: string,
     token: string,
-    queryParams: URLSearchParams,
+    queryParams?: URLSearchParams,
     options?: RequestInit,
 ): GetApiReturned {
     let response: Response;
     try {
         const baseUrl = "https://onemocneni-aktualne.mzcr.cz";
         const url = new URL(endpoint, baseUrl);
-        queryParams.forEach((value, key) => {
+        queryParams?.forEach((value, key) => {
             url.searchParams.append(key, value);
         });
         url.searchParams.append("apiToken", token);

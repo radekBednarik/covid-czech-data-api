@@ -43,4 +43,11 @@ export default class Hospitalizations {
       queryParams,
     );
   }
+
+  public async getHospitalizationOfId({ id }: { id: string }) {
+    return await this.getApi(
+      `/api/v3/hospitalizace/${id}`,
+      this.token,
+    );
+  }
 }
