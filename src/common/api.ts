@@ -1,3 +1,4 @@
+import { queryParamsMap } from "./utils.ts";
 export type GetApiReturned = Promise<[any, null] | [null, Error]>;
 
 export async function getApi(
@@ -15,9 +16,7 @@ export async function getApi(
         });
         url.searchParams.append("apiToken", token);
 
-        const encodedUrl = encodeURI(url.href);
-
-        response = await fetch(encodedUrl, {
+        response = await fetch(url.href, {
             ...options,
             headers: {
                 "Content-Type": "application/json",
@@ -46,14 +45,15 @@ export function createQueryParams(args: Record<string, string | number | undefin
 
     Object.entries(args).forEach((arg) => {
         const [key, value] = arg;
+        const _key = queryParamsMap[key];
 
         if (typeof value !== "undefined") {
             if (Array.isArray(value)) {
                 value.forEach((item) => {
-                    queryParams.append("properties", item.toString());
+                    queryParams.append(_key, item.toString());
                 });
             } else {
-                queryParams.append(key, value.toString());
+                queryParams.append(_key, value.toString());
             }
         }
     });
