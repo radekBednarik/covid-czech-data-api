@@ -15,10 +15,11 @@ describe("getApi function", () => {
         const [data, err] = await getApi(endpoint, token, searchParams);
 
         expect(err).toBeNull();
+        expect(data).toBeInstanceOf(Array);
         expect(data).toHaveLength(10);
     });
 
-    it("bad - call to nonexistent endpoint fails", async () => {
+    it("unhappy - call to nonexistent endpoint handles error", async () => {
         const endpoint = "/api/v3/hospitalizac";
         const searchParams = new URLSearchParams({
             page: "1",
@@ -29,6 +30,7 @@ describe("getApi function", () => {
         const [data, err] = await getApi(endpoint, token, searchParams);
 
         expect(err).not.toBeNull();
+        expect(err).toBeInstanceOf(Error);
         expect(data).toBeNull();
     });
 });
