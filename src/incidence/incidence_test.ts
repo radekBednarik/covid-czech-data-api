@@ -34,7 +34,9 @@ describe("incidence apis", () => {
             it("unhappy - call endpoint with page=-1 returns error", async () => {
                 const [data, err] = await client.incidence.getIncidence714CzV3({ page: -1 });
 
-                expect(err).toBeInstanceOf(Error);
+                expect(err).toHaveProperty("error");
+                expect(err?.error).toHaveProperty("statusCode");
+                expect(err?.error).toHaveProperty("statusMessage");
                 expect(data).toBeNull();
             });
         });

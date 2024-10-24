@@ -1,5 +1,5 @@
 import { queryParamsMap } from "./utils.ts";
-export type GetApiReturned = Promise<[any, null] | [null, Error]>;
+export type GetApiReturned = Promise<[any, null] | [null, GetApiError]>;
 
 export async function getApi(
   endpoint: string,
@@ -25,18 +25,27 @@ export async function getApi(
     });
 
     if (response.ok) {
-      return [await response.json(), null];
+      return [ await response.json(), null ];
     }
 
     await response.body?.cancel();
     return [
       null,
-      new Error(
-        `Func getApi failed with response status code: ${response.status} and response status message: ${response.statusText}`,
-      ),
+      {
+        error: {
+          statusCode: response.status,
+          statusMessage: response.statusText,
+          message: `Func getApi failed to retrieve data from provided endpoint:\n${url.href}`
+        }
+      }
+      
     ];
   } catch (error) {
-    return [null, new Error(`Func getApi failed with error:\n${error}`)];
+    return [ null, {
+      error: {
+        message: `Func getApi failed with error:\n${error}` 
+      }
+    } ];
   }
 }
 
@@ -59,4 +68,12 @@ export function createQueryParams(args: Record<string, string | number | undefin
   });
 
   return queryParams;
+}
+
+export interface GetApiError {
+  error: {
+    statusCode?: number;
+    statusMessage?: string;
+    message?: string;
+  };
 }

@@ -1,4 +1,4 @@
-import { type getApi } from "../common/api.ts";
+import { type getApi, type GetApiError } from "../common/api.ts";
 import { createQueryParams } from "../common/api.ts";
 export default class Incidence {
     private readonly token: string;
@@ -25,7 +25,7 @@ export default class Incidence {
         datumAfter?: string;
         datumStrictlyBefore?: string;
         datumStrictlyAfter?: string;
-    } = {}): Promise<[IncidenceDataItemArr, null] | [null, Error]> {
+    } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> {
         const queryParams = createQueryParams({
             page,
             itemsPerPage,
@@ -52,7 +52,7 @@ export default class Incidence {
         id,
     }: {
         id: string;
-    }): Promise<[IncidenceDataItem, null] | [null, Error]> {
+    }): Promise<[IncidenceDataItem, null] | [null, GetApiError]> {
         const [data, err] = await this.getApi(
             `/api/v3/incidence-7-14-cr/${id}`,
             this.token,

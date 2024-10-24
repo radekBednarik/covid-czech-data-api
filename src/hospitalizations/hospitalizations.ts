@@ -1,4 +1,4 @@
-import { type getApi } from "../common/api.ts";
+import { type getApi, type GetApiError } from "../common/api.ts";
 import { createQueryParams } from "../common/api.ts";
 export default class Hospitalizations {
   private readonly token: string;
@@ -27,7 +27,7 @@ export default class Hospitalizations {
       datumAfter?: string;
       datumStrictlyAfter?: string;
     } = {},
-  ): Promise<[HospitalizationsDataItemArr, null] | [null, Error]> {
+  ): Promise<[HospitalizationsDataItemArr, null] | [null, GetApiError]> {
     const queryParams = createQueryParams({
       page,
       itemsPerPage,
@@ -51,7 +51,7 @@ export default class Hospitalizations {
 
   public async getHospitalizationOfId(
     { id }: { id: string },
-  ): Promise<[HospitalizationsDataItemArr, null] | [null, Error]> {
+  ): Promise<[HospitalizationsDataItemArr, null] | [null, GetApiError]> {
     const [data, err] = await this.getApi(
       `/api/v3/hospitalizace/${id}`,
       this.token,

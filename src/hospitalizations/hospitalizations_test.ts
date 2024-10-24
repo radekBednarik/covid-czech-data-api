@@ -51,7 +51,9 @@ describe("hospitalizace endpoints", () => {
         page: -1,
       });
 
-      expect(err).toBeInstanceOf(Error);
+      expect(err).toHaveProperty("error");
+      expect(err?.error).toHaveProperty("statusCode");
+      expect(err?.error).toHaveProperty("statusMessage");
       expect(data).toBeNull();
     });
   });

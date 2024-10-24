@@ -30,7 +30,9 @@ describe("getApi function", () => {
     const [data, err] = await getApi(endpoint, token, searchParams);
 
     expect(err).not.toBeNull();
-    expect(err).toBeInstanceOf(Error);
+    expect(err).toHaveProperty("error");
+    expect(err?.error).toHaveProperty("statusCode");
+    expect(err?.error).toHaveProperty("statusMessage");
     expect(data).toBeNull();
   });
 });
