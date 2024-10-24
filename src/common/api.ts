@@ -25,7 +25,7 @@ export async function getApi(
     });
 
     if (response.ok) {
-      return [ await response.json(), null ];
+      return [await response.json(), null];
     }
 
     await response.body?.cancel();
@@ -35,17 +35,16 @@ export async function getApi(
         error: {
           statusCode: response.status,
           statusMessage: response.statusText,
-          message: `Func getApi failed to retrieve data from provided endpoint:\n${url.href}`
-        }
-      }
-      
+          message: `Func getApi failed to retrieve data from provided endpoint:\n${url.href}`,
+        },
+      },
     ];
   } catch (error) {
-    return [ null, {
+    return [null, {
       error: {
-        message: `Func getApi failed with error:\n${error}` 
-      }
-    } ];
+        message: `Func getApi failed with error:\n${error}`,
+      },
+    }];
   }
 }
 
