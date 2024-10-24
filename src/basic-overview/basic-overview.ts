@@ -31,7 +31,9 @@ export default class BasicOverview {
     return [data as BasicOverviewItemArr, null];
   }
 
-  public async getBasicOverviewOfDayV3({ date }: { date: string }) {
+  public async getBasicOverviewOfDayV3(
+    { date }: { date: string },
+  ): Promise<[BasicOverviewItem, null] | [null, GetApiError]> {
     const [data, err] = await new ApiCallBuilder({ token: this.token })
       .provideEndpoint("/api/v3/zakladni-prehled").provideId(date)
       .build();

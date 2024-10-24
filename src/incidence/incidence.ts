@@ -77,7 +77,7 @@ export default class Incidence {
     datumStrictlyAfter?: string;
     krajNutsKod?: string | string[];
     krajNazev?: string | string[];
-  } = {}) {
+  } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> {
     const [data, err] = await new ApiCallBuilder({ token: this.token })
       .provideEndpoint("/api/v3/incidence-7-14-kraje").provideQueryParams([
         { page },
