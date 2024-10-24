@@ -1,4 +1,4 @@
-import { beforeAll, beforeEach, describe, it } from "@std/testing/bdd";
+import { beforeAll, describe, it } from "@std/testing/bdd";
 import { expect } from "@std/expect";
 import Client from "../client/client.ts";
 import "@std/dotenv/load";
@@ -57,15 +57,19 @@ describe("hospitalizace endpoints", () => {
     });
 
     describe("/api/v3/hospitalizace/:id", () => {
-        let data: Record<string, any>[];
-        beforeEach(async () => {
-            const returned = await client.hospitalization.getHospitalizationsV3({ itemsPerPage: 1 });
-            data = returned[0];
-        });
         it("happy - calling for specific id returns data object", async () => {
-            const [idData, err] = await client.hospitalization.getHospitalizationOfId({ id: data[0]["id"] });
+            const [data, err] = await client.hospitalization.getHospitalizationsV3({ itemsPerPage: 1 });
 
+            expect(data).toBeInstanceOf(Array);
+            expect(data).toHaveLength(1);
             expect(err).toBeNull();
+
+            const [idData, error] = await client.hospitalization.getHospitalizationOfId({
+                // @ts-expect-error data can be null but we want to test it
+                id: data[0]["id"],
+            });
+
+            expect(error).toBeNull();
             expect(idData).toHaveProperty("id");
         });
     });
