@@ -16,7 +16,7 @@ Use JSR offered options to install.
 ## Usage
 
 ```ts
-import Client from "jsr:";
+import Client from "@bedna/czech-covid-data-api-lib";
 
 const client = new Client({ token: "<YOUR TOKEN>" });
 
