@@ -38,7 +38,8 @@ describe("hospitalizace endpoints", () => {
       const [data, err] = await client.hospitalization.getHospitalizationsV3({
         page: 1,
         itemsPerPage: 10,
-        datumAfter: new Date(new Date().setHours(new Date().getHours() + 48)).toLocaleDateString(),
+        datumAfter: new Date(new Date().setHours(new Date().getHours() + 48))
+          .toLocaleDateString(),
       });
 
       expect(err).toBeNull();
@@ -60,16 +61,19 @@ describe("hospitalizace endpoints", () => {
 
   describe("/api/v3/hospitalizace/:id", () => {
     it("happy - calling for specific id returns data object", async () => {
-      const [data, err] = await client.hospitalization.getHospitalizationsV3({ itemsPerPage: 1 });
+      const [data, err] = await client.hospitalization.getHospitalizationsV3({
+        itemsPerPage: 1,
+      });
 
       expect(data).toBeInstanceOf(Array);
       expect(data).toHaveLength(1);
       expect(err).toBeNull();
 
-      const [idData, error] = await client.hospitalization.getHospitalizationOfId({
-        // @ts-expect-error data can be null but we want to test it
-        id: data[0]["id"],
-      });
+      const [idData, error] = await client.hospitalization
+        .getHospitalizationOfId({
+          // @ts-expect-error data can be null but we want to test it
+          id: data[0]["id"],
+        });
 
       expect(error).toBeNull();
       expect(idData).toHaveProperty("id");

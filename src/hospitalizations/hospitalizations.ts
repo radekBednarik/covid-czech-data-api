@@ -1,5 +1,5 @@
 import { type getApi, type GetApiError } from "../common/api.ts";
-import { createQueryParams } from "../common/api.ts";
+import ApiCallBuilder from "../builders/api-call-builder.ts";
 export default class Hospitalizations {
   private readonly token: string;
   private readonly getApi: typeof getApi;
@@ -28,20 +28,20 @@ export default class Hospitalizations {
       datumStrictlyAfter?: string;
     } = {},
   ): Promise<[HospitalizationsDataItemArr, null] | [null, GetApiError]> {
-    const queryParams = createQueryParams({
-      page,
-      itemsPerPage,
-      properties,
-      datumBefore,
-      datumStrictlyBefore,
-      datumAfter,
-      datumStrictlyAfter,
-    });
-    const [data, err] = await this.getApi(
-      "/api/v3/hospitalizace",
-      this.token,
-      queryParams,
-    );
+    const [data, err] = await new ApiCallBuilder({ token: this.token })
+      .provideEndpoint(
+        "/api/v3/hospitalizace",
+      ).provideQueryParams(
+        [
+          { page },
+          { itemsPerPage },
+          { properties },
+          { datumBefore },
+          { datumStrictlyBefore },
+          { datumAfter },
+          { datumStrictlyAfter },
+        ],
+      ).build();
 
     if (err) {
       return [data, err];
@@ -52,10 +52,8 @@ export default class Hospitalizations {
   public async getHospitalizationOfId(
     { id }: { id: string },
   ): Promise<[HospitalizationsDataItemArr, null] | [null, GetApiError]> {
-    const [data, err] = await this.getApi(
-      `/api/v3/hospitalizace/${id}`,
-      this.token,
-    );
+    const [data, err] = await new ApiCallBuilder({ token: this.token })
+      .provideEndpoint("/api/v3/hospitalizace").provideId(id).build();
 
     if (err) {
       return [data, err];
