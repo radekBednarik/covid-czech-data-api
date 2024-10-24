@@ -151,6 +151,17 @@ export default class Incidence {
 
     return [data as IncidenceDataItemArr, null];
   }
+
+  public async getIncidence714DistrictOfIdV3({ id }: { id: string }) {
+    const [data, err] = await new ApiCallBuilder({ token: this.token })
+      .provideEndpoint("/api/v3/incidence-7-14-okresy").provideId(id).build();
+
+    if (err) {
+      return [data, err];
+    }
+
+    return [data as IncidenceDataItem, null];
+  }
 }
 
 export interface IncidenceDataItem {

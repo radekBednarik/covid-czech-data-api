@@ -99,4 +99,42 @@ describe("incidence apis", () => {
       });
     });
   });
+
+  describe("districts", () => {
+    describe("incidence", () => {
+      it("happy - call endpoint with defaults returns data", async () => {
+        const [data, err] = await client.incidence.getIncidence714DistrictV3();
+
+        expect(err).toBeNull();
+        expect(data).toBeInstanceOf(Array);
+        expect(data).toHaveLength(100);
+      });
+
+      it("happy - call endpoint with custom params returns data", async () => {
+        const [data, err] = await client.incidence.getIncidence714DistrictV3({
+          page: 100,
+          itemsPerPage: 1,
+          okresLauKod: ["CZ0208", "CZ0204"],
+        });
+
+        expect(err).toBeNull();
+        expect(data).toBeInstanceOf(Array);
+        expect(data).toHaveLength(1);
+      });
+    });
+
+    describe("incidence by id", () => {
+      it("happy - call endpoint of specific id returns data", async () => {
+        const [_data] = await client.incidence.getIncidence714DistrictV3({
+          itemsPerPage: 1,
+        });
+        const [data, err] = await client.incidence
+          // @ts-expect-error test
+          .getIncidence714DistrictOfIdV3({ id: _data[0].id });
+
+        expect(err).toBeNull();
+        expect(data).toHaveProperty("id");
+      });
+    });
+  });
 });
