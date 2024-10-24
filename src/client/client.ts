@@ -2,6 +2,10 @@ import Hospitalizations from "../hospitalizations/hospitalizations.ts";
 import Incidence from "../incidence/incidence.ts";
 import BasicOverview from "../basic-overview/basic-overview.ts";
 
+/**
+ * Represents single entrypoint for calling supported
+ * COVID REST APIs.
+ */
 export default class Client {
   /** @property token - your API token */
   private readonly token: string;
