@@ -8,4 +8,6 @@ export const queryParamsMap = {
   datumStrictlyAfter: "datum[strictly_after]",
   krajNutsKod: "kraj_nuts_kod",
   krajNazev: "kraj_nazev",
+  okresLauKod: "okres_lau_kod",
+  okresNazev: "okres_nazev",
 } as { [key: string]: string };
