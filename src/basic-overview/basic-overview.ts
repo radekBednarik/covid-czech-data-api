@@ -2,12 +2,27 @@ import ApiCallBuilder from "../builders/api-call-builder.ts";
 import type { GetApiError } from "../common/api.ts";
 
 export default class BasicOverview {
+  /**@property token - API token */
   private readonly token: string;
 
+  /**
+   * Represents all methods for getting data of `zakladni-prehled`
+   * section of the available APIs.
+   *
+   * @link https://onemocneni-aktualne.mzcr.cz/api/v3/docs
+   * @param token API token
+   */
   constructor(token: string) {
     this.token = token;
   }
 
+  /**
+   * Handles call to `/api/v3/zakladni-prehled`
+   * @param param0
+   * @param param0.page
+   * @param param0.itemsPerPage
+   * @param param0.properties
+   */
   public async getBasicOverviewV3({
     page = 1,
     itemsPerPage = 100,
@@ -31,6 +46,13 @@ export default class BasicOverview {
     return [data as BasicOverviewItemArr, null];
   }
 
+  /**
+   * Handles call to `/api/v3/zakladni-prehled/:date`.
+   *
+   * @param param0
+   * @param param0.date - date in expected format of `YYYY-MM-DD`
+   * @returns
+   */
   public async getBasicOverviewOfDayV3(
     { date }: { date: string },
   ): Promise<[BasicOverviewItem, null] | [null, GetApiError]> {
