@@ -152,7 +152,9 @@ export default class Incidence {
     return [data as IncidenceDataItemArr, null];
   }
 
-  public async getIncidence714DistrictOfIdV3({ id }: { id: string }) {
+  public async getIncidence714DistrictOfIdV3(
+    { id }: { id: string },
+  ): Promise<[IncidenceDataItem, null] | [null, GetApiError]> {
     const [data, err] = await new ApiCallBuilder({ token: this.token })
       .provideEndpoint("/api/v3/incidence-7-14-okresy").provideId(id).build();
 
