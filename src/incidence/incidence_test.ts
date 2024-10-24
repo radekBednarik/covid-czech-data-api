@@ -32,7 +32,9 @@ describe("incidence apis", () => {
       });
 
       it("unhappy - call endpoint with page=-1 returns error", async () => {
-        const [data, err] = await client.incidence.getIncidence714CzV3({ page: -1 });
+        const [data, err] = await client.incidence.getIncidence714CzV3({
+          page: -1,
+        });
 
         expect(err).toHaveProperty("error");
         expect(err?.error).toHaveProperty("statusCode");
@@ -43,11 +45,15 @@ describe("incidence apis", () => {
 
     describe("incidence of id", () => {
       it("happy - call endpoint with specific id returns data", async () => {
-        const [data, err] = await client.incidence.getIncidence714CzV3({ itemsPerPage: 1 });
+        const [data, err] = await client.incidence.getIncidence714CzV3({
+          itemsPerPage: 1,
+        });
 
         expect(err).toBeNull();
-        // @ts-expect-error this is a test
-        const [_data, error] = await client.incidence.getIncidence714CzOfIdV3({ id: data[0].id });
+        const [_data, error] = await client.incidence.getIncidence714CzOfIdV3({
+          // @ts-expect-error this is a test
+          id: data[0].id,
+        });
 
         expect(error).toBeNull();
         expect(_data).toHaveProperty("id");
@@ -80,9 +86,13 @@ describe("incidence apis", () => {
 
     describe("incidence of id", () => {
       it("happy - call endpoint with id returns data", async () => {
-        const [_data, _err] = await client.incidence.getIncidence714RegionV3({ itemsPerPage: 1 });
-        // @ts-expect-error test
-        const [data, err] = await client.incidence.getIncidence714RegionOfIdV3({ id: _data[0].id });
+        const [_data, _err] = await client.incidence.getIncidence714RegionV3({
+          itemsPerPage: 1,
+        });
+        const [data, err] = await client.incidence.getIncidence714RegionOfIdV3({
+          // @ts-expect-error test
+          id: _data[0].id,
+        });
 
         expect(err).toBeNull();
         expect(data).toHaveProperty("id");

@@ -1,185 +1,167 @@
 import { type getApi, type GetApiError } from "../common/api.ts";
-import { createQueryParams } from "../common/api.ts";
+import ApiCallBuilder from "../builders/api-call-builder.ts";
 export default class Incidence {
-    private readonly token: string;
-    private readonly getApi: typeof getApi;
+  private readonly token: string;
+  private readonly getApi: typeof getApi;
 
-    constructor(getApiFunc: typeof getApi, token: string) {
-        this.getApi = getApiFunc;
-        this.token = token;
+  constructor(getApiFunc: typeof getApi, token: string) {
+    this.getApi = getApiFunc;
+    this.token = token;
+  }
+
+  public async getIncidence714CzV3({
+    page = 1,
+    itemsPerPage = 100,
+    properties,
+    datumBefore,
+    datumAfter,
+    datumStrictlyBefore,
+    datumStrictlyAfter,
+  }: {
+    page?: number;
+    itemsPerPage?: number;
+    properties?: string[];
+    datumBefore?: string;
+    datumAfter?: string;
+    datumStrictlyBefore?: string;
+    datumStrictlyAfter?: string;
+  } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> {
+    const [data, err] = await new ApiCallBuilder({ token: this.token })
+      .provideEndpoint("/api/v3/incidence-7-14-cr").provideQueryParams([
+        { page },
+        { itemsPerPage },
+        { properties },
+        { datumBefore },
+        { datumStrictlyBefore },
+        { datumAfter },
+        { datumStrictlyAfter },
+      ]).build();
+
+    if (err) {
+      return [data, err];
     }
 
-    public async getIncidence714CzV3({
-        page = 1,
-        itemsPerPage = 100,
-        properties,
-        datumBefore,
-        datumAfter,
-        datumStrictlyBefore,
-        datumStrictlyAfter,
-    }: {
-        page?: number;
-        itemsPerPage?: number;
-        properties?: string[];
-        datumBefore?: string;
-        datumAfter?: string;
-        datumStrictlyBefore?: string;
-        datumStrictlyAfter?: string;
-    } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> {
-        const queryParams = createQueryParams({
-            page,
-            itemsPerPage,
-            properties,
-            datumBefore,
-            datumStrictlyBefore,
-            datumAfter,
-            datumStrictlyAfter,
-        });
-        const [data, err] = await this.getApi(
-            "/api/v3/incidence-7-14-cr",
-            this.token,
-            queryParams,
-        );
+    return [data as IncidenceDataItemArr, null];
+  }
 
-        if (err) {
-            return [data, err];
-        }
+  public async getIncidence714CzOfIdV3({
+    id,
+  }: {
+    id: string;
+  }): Promise<[IncidenceDataItem, null] | [null, GetApiError]> {
+    const [data, err] = await new ApiCallBuilder({ token: this.token })
+      .provideEndpoint("/api/v3/incidence-7-14-cr").provideId(id).build();
 
-        return [data as IncidenceDataItemArr, null];
+    if (err) {
+      return [data, err];
     }
 
-    public async getIncidence714CzOfIdV3({
-        id,
-    }: {
-        id: string;
-    }): Promise<[IncidenceDataItem, null] | [null, GetApiError]> {
-        const [data, err] = await this.getApi(
-            `/api/v3/incidence-7-14-cr/${id}`,
-            this.token,
-        );
+    return [data as IncidenceDataItem, null];
+  }
 
-        if (err) {
-            return [data, err];
-        }
+  public async getIncidence714RegionV3({
+    page = 1,
+    itemsPerPage = 100,
+    properties,
+    datumBefore,
+    datumStrictlyBefore,
+    datumAfter,
+    datumStrictlyAfter,
+    krajNutsKod,
+    krajNazev,
+  }: {
+    page?: number;
+    itemsPerPage?: number;
+    properties?: string[];
+    datumBefore?: string;
+    datumStrictlyBefore?: string;
+    datumAfter?: string;
+    datumStrictlyAfter?: string;
+    krajNutsKod?: string | string[];
+    krajNazev?: string | string[];
+  } = {}) {
+    const [data, err] = await new ApiCallBuilder({ token: this.token })
+      .provideEndpoint("/api/v3/incidence-7-14-kraje").provideQueryParams([
+        { page },
+        { itemsPerPage },
+        { properties },
+        { datumBefore },
+        { datumStrictlyBefore },
+        { datumAfter },
+        { datumStrictlyAfter },
+        { krajNutsKod },
+        { krajNazev },
+      ]).build();
 
-        return [data as IncidenceDataItem, null];
+    if (err) {
+      return [data, err];
     }
 
-    public async getIncidence714RegionV3({
-        page = 1,
-        itemsPerPage = 100,
-        properties,
-        datumBefore,
-        datumStrictlyBefore,
-        datumAfter,
-        datumStrictlyAfter,
-        krajNutsKod,
-        krajNazev,
-    }: {
-        page?: number;
-        itemsPerPage?: number;
-        properties?: string[];
-        datumBefore?: string;
-        datumStrictlyBefore?: string;
-        datumAfter?: string;
-        datumStrictlyAfter?: string;
-        krajNutsKod?: string | string[];
-        krajNazev?: string | string[];
-    } = {}) {
-        const queryParams = createQueryParams({
-            page,
-            itemsPerPage,
-            properties,
-            datumBefore,
-            datumStrictlyBefore,
-            datumAfter,
-            datumStrictlyAfter,
-            krajNutsKod,
-            krajNazev,
-        });
+    return [data as IncidenceDataItemArr, null];
+  }
 
-        const [data, err] = await this.getApi(
-            "/api/v3/incidence-7-14-kraje",
-            this.token,
-            queryParams,
-        );
+  public async getIncidence714RegionOfIdV3(
+    { id }: { id: string },
+  ): Promise<[IncidenceDataItem, null] | [null, GetApiError]> {
+    const [data, err] = await new ApiCallBuilder({ token: this.token })
+      .provideEndpoint("/api/v3/incidence-7-14-kraje").provideId(id).build();
 
-        if (err) {
-            return [data, err];
-        }
-
-        return [data as IncidenceDataItemArr, null];
+    if (err) {
+      return [data, err];
     }
 
-    public async getIncidence714RegionOfIdV3(
-        { id }: { id: string },
-    ): Promise<[IncidenceDataItem, null] | [null, GetApiError]> {
-        const [data, err] = await this.getApi(
-            `/api/v3/incidence-7-14-kraje/${id}`,
-            this.token,
-        );
+    return [data as IncidenceDataItem, null];
+  }
 
-        if (err) {
-            return [data, err];
-        }
+  public async getIncidence714DistrictV3({
+    page = 1,
+    itemsPerPage = 100,
+    properties,
+    datumBefore,
+    datumStrictlyBefore,
+    datumAfter,
+    datumStrictlyAfter,
+    okresLauKod,
+    okresNazev,
+  }: {
+    page?: number;
+    itemsPerPage?: number;
+    properties?: string[];
+    datumBefore?: string;
+    datumStrictlyBefore?: string;
+    datumAfter?: string;
+    datumStrictlyAfter?: string;
+    okresLauKod?: string | string[];
+    okresNazev?: string | string[];
+  } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> {
+    const [data, err] = await new ApiCallBuilder({ token: this.token })
+      .provideEndpoint("/api/v3/incidence-7-14-okresy").provideQueryParams([
+        { page },
+        { itemsPerPage },
+        { properties },
+        { datumBefore },
+        { datumStrictlyBefore },
+        { datumAfter },
+        { datumStrictlyAfter },
+        { okresLauKod },
+        { okresNazev },
+      ]).build();
 
-        return [data as IncidenceDataItem, null];
+    if (err) {
+      return [data, err];
     }
 
-    public async getIncidence714DistrictV3({
-        page = 1,
-        itemsPerPage = 100,
-        properties,
-        datumBefore,
-        datumStrictlyBefore,
-        datumAfter,
-        datumStrictlyAfter,
-        okresLauKod,
-        okresNazev,
-    }: {
-        page?: number;
-        itemsPerPage?: number;
-        properties?: string[];
-        datumBefore?: string;
-        datumStrictlyBefore?: string;
-        datumAfter?: string;
-        datumStrictlyAfter?: string;
-        okresLauKod?: string | string[];
-        okresNazev?: string | string[];
-    } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> {
-        const queryParams = createQueryParams({
-            page,
-            itemsPerPage,
-            properties,
-            datumBefore,
-            datumStrictlyBefore,
-            datumAfter,
-            datumStrictlyAfter,
-            okresLauKod,
-            okresNazev,
-        });
-
-        const [data, err] = await this.getApi(
-            "/api/v3/incidence-7-14-okresy",
-            this.token,
-            queryParams,
-        );
-
-        if (err) {
-            return [data, err];
-        }
-
-        return [data as IncidenceDataItemArr, null];
-    }
+    return [data as IncidenceDataItemArr, null];
+  }
 }
 
 export interface IncidenceDataItem {
-    id: string;
-    datum: string;
-    incidence_7: number;
-    incidence_14: number;
-    incidence_7_100000: number;
-    incidence_14_100000: number;
+  id: string;
+  datum: string;
+  incidence_7: number;
+  incidence_14: number;
+  incidence_7_100000: number;
+  incidence_14_100000: number;
 }
 
 export type IncidenceDataItemArr = IncidenceDataItem[];

@@ -18,7 +18,7 @@
     }
   },
   "fmt": {
-    "lineWidth": 109,
+    "lineWidth": 80,
     "useTabs": false,
     "semiColons": true,
     "singleQuote": false,

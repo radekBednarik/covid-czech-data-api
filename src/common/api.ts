@@ -1,5 +1,8 @@
 import { queryParamsMap } from "./utils.ts";
 export type GetApiReturned = Promise<[any, null] | [null, GetApiError]>;
+export type QueryParams = Array<
+  Record<string, string | string[] | number | undefined>
+>;
 
 export async function getApi(
   endpoint: string,
@@ -35,7 +38,8 @@ export async function getApi(
         error: {
           statusCode: response.status,
           statusMessage: response.statusText,
-          message: `Func getApi failed to retrieve data from provided endpoint:\n${url.href}`,
+          message:
+            `Func getApi failed to retrieve data from provided endpoint:\n${url.href}`,
         },
       },
     ];
@@ -48,22 +52,23 @@ export async function getApi(
   }
 }
 
-export function createQueryParams(args: Record<string, string | number | undefined | string[]>) {
+export function createQueryParams(args: QueryParams) {
   const queryParams = new URLSearchParams();
 
-  Object.entries(args).forEach((arg) => {
-    const [key, value] = arg;
-    const _key = queryParamsMap[key];
+  args.forEach((arg) => {
+    Object.entries(arg).forEach(([key, value]) => {
+      const _key = queryParamsMap[key];
 
-    if (typeof value !== "undefined") {
-      if (Array.isArray(value)) {
-        value.forEach((item) => {
-          queryParams.append(_key, item.toString());
-        });
-      } else {
-        queryParams.append(_key, value.toString());
+      if (typeof value !== "undefined") {
+        if (Array.isArray(value)) {
+          value.forEach((item) => {
+            queryParams.append(_key, item.toString());
+          });
+        } else {
+          queryParams.append(_key, value.toString());
+        }
       }
-    }
+    });
   });
 
   return queryParams;
