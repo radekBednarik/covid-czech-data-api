@@ -1,11 +1,9 @@
-import { type getApi, type GetApiError } from "../common/api.ts";
+import { type GetApiError } from "../common/api.ts";
 import ApiCallBuilder from "../builders/api-call-builder.ts";
 export default class Hospitalizations {
   private readonly token: string;
-  private readonly getApi: typeof getApi;
 
-  constructor(getApiFunc: typeof getApi, token: string) {
-    this.getApi = getApiFunc;
+  constructor(token: string) {
     this.token = token;
   }
 
