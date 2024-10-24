@@ -11,7 +11,7 @@ provides a more user-friendly interface.
 
 ## Installation
 
-TBD
+Use JSR offered options to install.
 
 ## Usage
 
@@ -29,7 +29,8 @@ if (!err) {
 
 ## Documentation
 
-- library documentation and currently available abstractions are [HERE]()
+- library documentation and currently available abstractions are
+  [HERE](https://jsr.io/@bedna/czech-covid-data-api-lib@0.1.0)
 
 - official API documentation is
   [HERE](https://onemocneni-aktualne.mzcr.cz/api/v3/docs)
