@@ -1,6 +1,7 @@
 import Hospitalizations from "../hospitalizations/hospitalizations.ts";
 import Incidence from "../incidence/incidence.ts";
 import BasicOverview from "../basic-overview/basic-overview.ts";
+import Deaths from "../deaths/deaths.ts";
 
 /**
  * Represents single entrypoint for calling supported
@@ -15,6 +16,8 @@ export default class Client {
   public readonly incidence: Incidence;
   /**@property basicOverview - represents instance of BasicOverview class */
   public readonly basicOverview: BasicOverview;
+  /** @property deaths - represents instance of the Deaths class */
+  public readonly deaths: Deaths;
 
   /**
    * Represents single entrypoint for calling the supported
@@ -33,6 +36,7 @@ export default class Client {
     this.hospitalization = new Hospitalizations(this.token);
     this.incidence = new Incidence(this.token);
     this.basicOverview = new BasicOverview(this.token);
+    this.deaths = new Deaths(this.token);
   }
 
   /**

@@ -30,7 +30,7 @@ describe("basic overview", () => {
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
-          }).format(new Date()),
+          }).format(new Date().setHours(new Date().getHours() - 24)),
         });
 
       expect(err).toBeNull();

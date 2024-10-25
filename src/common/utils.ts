@@ -10,4 +10,9 @@ export const queryParamsMap = {
   krajNazev: "kraj_nazev",
   okresLauKod: "okres_lau_kod",
   okresNazev: "okres_nazev",
+  vekBetween: "vek[between]",
+  vekGt: "vek[gt]",
+  vekGte: "vek[gte]",
+  vekLt: "vek[lt]",
+  vekLte: "vek[lte]",
 } as { [key: string]: string };
