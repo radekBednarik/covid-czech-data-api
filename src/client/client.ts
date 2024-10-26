@@ -2,6 +2,7 @@ import Hospitalizations from "../hospitalizations/hospitalizations.ts";
 import Incidence from "../incidence/incidence.ts";
 import BasicOverview from "../basic-overview/basic-overview.ts";
 import Deaths from "../deaths/deaths.ts";
+import VaccinationAggregated from "../vaccination/vaccination-aggregated.ts";
 
 /**
  * Represents single entrypoint for calling supported
@@ -18,6 +19,8 @@ export default class Client {
   public readonly basicOverview: BasicOverview;
   /** @property deaths - represents instance of the Deaths class */
   public readonly deaths: Deaths;
+  /** @property vaccinationAggregated - represents instance of the VaccinationAggregated class  */
+  public readonly vaccinationAggregated: VaccinationAggregated;
 
   /**
    * Represents single entrypoint for calling the supported
@@ -37,6 +40,7 @@ export default class Client {
     this.incidence = new Incidence(this.token);
     this.basicOverview = new BasicOverview(this.token);
     this.deaths = new Deaths(this.token);
+    this.vaccinationAggregated = new VaccinationAggregated(this.token);
   }
 
   /**

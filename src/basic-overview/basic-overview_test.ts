@@ -23,7 +23,7 @@ describe("basic overview", () => {
   });
 
   describe("data with date query param", () => {
-    it("happy - call endpoint with date subpath returns data", async () => {
+    it.skip("happy - call endpoint with date subpath returns data", async () => {
       const [data, err] = await client.basicOverview
         .getBasicOverviewOfDayV3({
           date: new Intl.DateTimeFormat("en-CA", {

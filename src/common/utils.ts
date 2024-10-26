@@ -15,4 +15,6 @@ export const queryParamsMap = {
   vekGte: "vek[gte]",
   vekLt: "vek[lt]",
   vekLte: "vek[lte]",
+  vakcina: "vakcina",
+  vekovaSkupina: "vekova_skupina",
 } as { [key: string]: string };
