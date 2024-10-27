@@ -78,7 +78,7 @@ export default class Incidence {
     krajNutsKod?: string | string[];
     krajNazev?: string | string[];
   } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<IncidenceDataItemArr>({ token: this.token })
       .provideEndpoint("/api/v3/incidence-7-14-kraje").provideQueryParams([
         { page },
         { itemsPerPage },
@@ -90,25 +90,15 @@ export default class Incidence {
         { krajNutsKod },
         { krajNazev },
       ]).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as IncidenceDataItemArr, null];
   }
 
   public async getIncidence714RegionOfIdV3(
     { id }: { id: string },
   ): Promise<[IncidenceDataItem, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<IncidenceDataItem>({
+      token: this.token,
+    })
       .provideEndpoint("/api/v3/incidence-7-14-kraje").provideId(id).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as IncidenceDataItem, null];
   }
 
   public async getIncidence714DistrictV3({
@@ -132,7 +122,9 @@ export default class Incidence {
     okresLauKod?: string | string[];
     okresNazev?: string | string[];
   } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<IncidenceDataItemArr>({
+      token: this.token,
+    })
       .provideEndpoint("/api/v3/incidence-7-14-okresy").provideQueryParams([
         { page },
         { itemsPerPage },
@@ -144,25 +136,15 @@ export default class Incidence {
         { okresLauKod },
         { okresNazev },
       ]).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as IncidenceDataItemArr, null];
   }
 
   public async getIncidence714DistrictOfIdV3(
     { id }: { id: string },
   ): Promise<[IncidenceDataItem, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<IncidenceDataItem>({
+      token: this.token,
+    })
       .provideEndpoint("/api/v3/incidence-7-14-okresy").provideId(id).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as IncidenceDataItem, null];
   }
 }
 

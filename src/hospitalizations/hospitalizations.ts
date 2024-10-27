@@ -26,7 +26,9 @@ export default class Hospitalizations {
       datumStrictlyAfter?: string;
     } = {},
   ): Promise<[HospitalizationsDataItemArr, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<HospitalizationsDataItemArr>({
+      token: this.token,
+    })
       .provideEndpoint(
         "/api/v3/hospitalizace",
       ).provideQueryParams(
@@ -40,24 +42,15 @@ export default class Hospitalizations {
           { datumStrictlyAfter },
         ],
       ).build();
-
-    if (err) {
-      return [data, err];
-    }
-    return [data as HospitalizationsDataItemArr, null];
   }
 
   public async getHospitalizationOfId(
     { id }: { id: string },
-  ): Promise<[HospitalizationsDataItemArr, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+  ): Promise<[HospitalizationsDataItem, null] | [null, GetApiError]> {
+    return await new ApiCallBuilder<HospitalizationsDataItem>({
+      token: this.token,
+    })
       .provideEndpoint("/api/v3/hospitalizace").provideId(id).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as HospitalizationsDataItemArr, err];
   }
 }
 

@@ -35,7 +35,9 @@ export default class VaccinationAggregated {
   } = {}): Promise<
     [VaccinationAggregatedItemArr, null] | [null, GetApiError]
   > {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<VaccinationAggregatedItemArr>({
+      token: this.token,
+    })
       .provideEndpoint("/api/v3/ockovani").provideQueryParams([
         { page },
         { itemsPerPage },
@@ -49,25 +51,15 @@ export default class VaccinationAggregated {
         { krajNazev },
         { vekovaSkupina },
       ]).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as VaccinationAggregatedItemArr, null];
   }
 
   public async getVaccinationOfIdV3(
     { id }: { id: string },
   ): Promise<[VaccinationAggregatedItem, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<VaccinationAggregatedItem>({
+      token: this.token,
+    })
       .provideEndpoint("/api/v3/ockovani").provideId(id).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as VaccinationAggregatedItem, null];
   }
 }
 

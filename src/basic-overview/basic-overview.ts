@@ -32,18 +32,14 @@ export default class BasicOverview {
     itemsPerPage?: number;
     properties?: string[];
   } = {}): Promise<[BasicOverviewItemArr, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<BasicOverviewItemArr>({
+      token: this.token,
+    })
       .provideEndpoint("/api/v3/zakladni-prehled").provideQueryParams([
         { page },
         { itemsPerPage },
         { properties },
       ]).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as BasicOverviewItemArr, null];
   }
 
   /**
@@ -56,15 +52,11 @@ export default class BasicOverview {
   public async getBasicOverviewOfDayV3(
     { date }: { date: string },
   ): Promise<[BasicOverviewItem, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<BasicOverviewItem>({
+      token: this.token,
+    })
       .provideEndpoint("/api/v3/zakladni-prehled").provideId(date)
       .build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as BasicOverviewItem, null];
   }
 }
 

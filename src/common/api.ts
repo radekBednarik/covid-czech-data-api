@@ -1,15 +1,14 @@
 import { queryParamsMap } from "./utils.ts";
-export type GetApiReturned = Promise<[any, null] | [null, GetApiError]>;
 export type QueryParams = Array<
   Record<string, string | string[] | number | undefined>
 >;
 
-export async function getApi(
+export async function getApi<T>(
   endpoint: string,
   token: string,
   queryParams?: URLSearchParams,
   options?: RequestInit,
-): GetApiReturned {
+): Promise<[T, null] | [null, GetApiError]> {
   let response: Response;
   try {
     const baseUrl = "https://onemocneni-aktualne.mzcr.cz";
