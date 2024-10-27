@@ -39,7 +39,9 @@ export default class Deaths {
     pohlavi?: string | string[];
     krajNutsKod?: string;
   } = {}): Promise<[DeathsItemArr, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<DeathsItemArr>({
+      token: this.token,
+    })
       .provideEndpoint("/api/v3/umrti").provideQueryParams([
         { page },
         { itemsPerPage },
@@ -56,25 +58,13 @@ export default class Deaths {
         { pohlavi },
         { krajNutsKod },
       ]).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as DeathsItemArr, null];
   }
 
   public async getDeathsOfIdV3(
     { id }: { id: string },
   ): Promise<[DeathsItem, null] | [null, GetApiError]> {
-    const [data, err] = await new ApiCallBuilder({ token: this.token })
+    return await new ApiCallBuilder<DeathsItem>({ token: this.token })
       .provideEndpoint("/api/v3/umrti").provideId(id).build();
-
-    if (err) {
-      return [data, err];
-    }
-
-    return [data as DeathsItem, null];
   }
 }
 

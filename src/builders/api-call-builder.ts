@@ -1,7 +1,7 @@
-import { getApi } from "../common/api.ts";
+import { getApi, type GetApiError } from "../common/api.ts";
 import { createQueryParams, type QueryParams } from "../common/api.ts";
 
-export default class ApiCallBuilder {
+export default class ApiCallBuilder<T> {
   private readonly token: string;
   private readonly getApi: typeof getApi;
   private endpoint: string;
@@ -35,7 +35,7 @@ export default class ApiCallBuilder {
     return this;
   }
 
-  public async build() {
+  public async build(): Promise<[T, null] | [null, GetApiError]> {
     let queryParams: URLSearchParams | undefined;
 
     if (typeof this.queryParams !== "undefined") {
