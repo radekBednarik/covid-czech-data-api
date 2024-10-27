@@ -50,7 +50,7 @@ export default class ApiCallBuilder<T> {
       this.endpoint = `${this.endpoint}/${this.id}`;
     }
 
-    return await this.getApi(
+    return await this.getApi<T>(
       this.endpoint,
       this.token,
       queryParams,
