@@ -6,14 +6,20 @@ provides a more user-friendly interface.
 
 ## System requirements
 
-- have [Deno](https://docs.deno.com/) installed. This library is tested against
-  Deno only.
+- have [Deno](https://docs.deno.com/) installed. This library is primarily
+  tested against Deno.
+
+- this library also supports [Node.js](https://nodejs.org/) as well, but only as
+  best effort.
+
+- have a valid token for the API. You can get it by registering at the
+  [API registration page](https://onemocneni-aktualne.mzcr.cz/vytvorit-ucet).
 
 ## Installation
 
 Use JSR offered options to install.
 
-## Usage
+## Example of usage
 
 ```ts
 import Client from "@bedna/czech-covid-data-api-lib";
@@ -28,9 +34,6 @@ if (!err) {
 ```
 
 ## Documentation
-
-- library documentation and currently available abstractions are
-  [HERE](https://jsr.io/@bedna/czech-covid-data-api-lib@0.1.0)
 
 - official API documentation is
   [HERE](https://onemocneni-aktualne.mzcr.cz/api/v3/docs)
