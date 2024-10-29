@@ -17,4 +17,7 @@ export const queryParamsMap = {
   vekLte: "vek[lte]",
   vakcina: "vakcina",
   vekovaSkupina: "vekova_skupina",
+  zarizeniKod: "zarizeni_kod",
+  zarizeniNazev: "zarizeni_nazev",
+  poradiDavky: "poradi_davky",
 } as { [key: string]: string };

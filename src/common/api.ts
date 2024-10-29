@@ -1,6 +1,6 @@
 import { queryParamsMap } from "./utils.ts";
 export type QueryParams = Array<
-  Record<string, string | string[] | number | undefined>
+  Record<string, string | string[] | number | number[] | undefined>
 >;
 
 export async function getApi<T>(
