@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@logtape/logtape@0.7": "0.7.0",
     "jsr:@std/assert@^1.0.6": "1.0.6",
     "jsr:@std/data-structures@^1.0.4": "1.0.4",
     "jsr:@std/dotenv@~0.225.2": "0.225.2",
@@ -11,6 +12,9 @@
     "jsr:@std/testing@^1.0.3": "1.0.3"
   },
   "jsr": {
+    "@logtape/logtape@0.7.0": {
+      "integrity": "245cc075a914d32ab97dea126ad0a62a9993a2a00f3ffc7fb0a59942a4212734"
+    },
     "@std/assert@1.0.6": {
       "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
       "dependencies": [
@@ -55,6 +59,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@logtape/logtape@0.7",
       "jsr:@std/assert@^1.0.6",
       "jsr:@std/dotenv@~0.225.2",
       "jsr:@std/expect@^1.0.5",
