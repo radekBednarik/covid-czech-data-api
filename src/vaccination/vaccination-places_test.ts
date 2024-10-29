@@ -7,7 +7,7 @@ let client: Client;
 
 describe("vaccination places", () => {
   beforeAll(() => {
-    client = new Client({ token: Deno.env.get("CLIENT_TOKEN") });
+    client = Client.getInstance({ token: Deno.env.get("CLIENT_TOKEN") });
   });
 
   describe("vaccination places", () => {

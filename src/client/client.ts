@@ -8,6 +8,8 @@ import VaccinationPlaces from "../vaccination/vaccination-places.ts";
 /**
  * Represents single entrypoint for calling supported
  * COVID REST APIs.
+ *
+ * Class is a singleton.
  */
 export default class Client {
   /** @property token - your API token */
@@ -24,6 +26,8 @@ export default class Client {
   public readonly vaccinationAggregated: VaccinationAggregated;
   /** @property vaccinationPlaces - represents instance of the VaccinationPlaces class */
   public readonly vaccinationPlaces: VaccinationPlaces;
+  /** @property instance - holds the singleton instance of the class */
+  private static instance: Client;
 
   /**
    * Represents single entrypoint for calling the supported
@@ -36,7 +40,7 @@ export default class Client {
    * @param param0 - constructor arg object
    * @param param0.token - your personal token
    */
-  constructor({ token }: { token?: string }) {
+  private constructor({ token }: { token?: string }) {
     this.token = this.addToken(token);
 
     this.hospitalization = new Hospitalizations(this.token);
@@ -59,5 +63,15 @@ export default class Client {
     }
 
     throw new Error("Provided token must be of the type string.");
+  }
+
+  public static getInstance({ token }: { token?: string }) {
+    if (typeof token !== "string") {
+      throw new Error("Provided token must be a string type!");
+    }
+    if (!Client.instance) {
+      Client.instance = new Client({ token });
+    }
+    return Client.instance;
   }
 }
