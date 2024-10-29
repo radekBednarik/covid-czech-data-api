@@ -72,8 +72,8 @@ describe("hospitalizace endpoints", () => {
       expect(data).toHaveLength(1);
       expect(err).toBeNull();
 
-      const [idData, error] =
-        await client.hospitalization.getHospitalizationOfId({
+      const [idData, error] = await client.hospitalization
+        .getHospitalizationOfId({
           // @ts-expect-error data can be null but we want to test it
           id: data[0]["id"],
         });
