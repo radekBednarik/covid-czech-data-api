@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import { queryParamsMap } from "./utils.ts";
 import { getLogger } from "@logtape/logtape";
 
