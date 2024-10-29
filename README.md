@@ -24,7 +24,8 @@ Use JSR offered options to install.
 ```ts
 import Client from "@bedna/czech-covid-data-api-lib";
 
-const client = new Client({ token: "<YOUR TOKEN>" });
+// Client is a singleton
+const client = Client.getInstance({ token: "<YOUR TOKEN>" });
 
 const [data, err] = await client.basicOverview.getBasicOverviewV3();
 

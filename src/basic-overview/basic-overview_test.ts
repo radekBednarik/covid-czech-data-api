@@ -7,9 +7,7 @@ let client: Client;
 
 describe("basic overview", () => {
   beforeAll(() => {
-    client = new Client({
-      token: Deno.env.get("CLIENT_TOKEN"),
-    });
+    client = Client.getInstance({ token: Deno.env.get("CLIENT_TOKEN") });
   });
 
   describe("data without date query param", () => {

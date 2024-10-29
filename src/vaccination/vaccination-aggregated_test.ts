@@ -7,7 +7,7 @@ let client: Client;
 
 describe("vaccination aggregated", () => {
   beforeAll(() => {
-    client = new Client({ token: Deno.env.get("CLIENT_TOKEN") });
+    client = Client.getInstance({ token: Deno.env.get("CLIENT_TOKEN") });
   });
 
   describe("vaccination", () => {
