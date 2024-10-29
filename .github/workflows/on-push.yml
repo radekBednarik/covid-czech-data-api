@@ -16,13 +16,14 @@ jobs:
       - name: Setup repo
         uses: actions/checkout/@v4
         with:
+          repository: radekBednarik/covid-czech-data-api
           token: ${{secrets.PAT-ALLOW-WF-MOD}}
 
       - name: Setup Deno
         uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x:w
-          
+
 
       - name: Format
         run: deno fmt
