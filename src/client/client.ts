@@ -65,7 +65,7 @@ export default class Client {
     throw new Error("Provided token must be of the type string.");
   }
 
-  public static getInstance({ token }: { token?: string }) {
+  public static getInstance({ token }: { token?: string }): Client {
     if (typeof token !== "string") {
       throw new Error("Provided token must be a string type!");
     }
