@@ -6,7 +6,7 @@
  * ```ts
  * import Client from '@bedna/czech-covid-data-api-lib'
  *
- * const client = new Client({token: '<YOUR API TOKEN>'});
+ * const client = Client.getInstance({token: '<YOUR API TOKEN>'});
  *
  * const [data, err] = await client.hospitalization.getHospitalizationsV3()
  *
