@@ -38,8 +38,11 @@ describe("hospitalizace endpoints", () => {
       const [data, err] = await client.hospitalization.getHospitalizationsV3({
         page: 1,
         itemsPerPage: 10,
-        datumAfter: new Date(new Date().setHours(new Date().getHours() + 48))
-          .toLocaleDateString(),
+        datumAfter: new Intl.DateTimeFormat("en-CA", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(new Date(new Date().setHours(new Date().getHours() + 48))),
       });
 
       expect(err).toBeNull();
@@ -69,8 +72,8 @@ describe("hospitalizace endpoints", () => {
       expect(data).toHaveLength(1);
       expect(err).toBeNull();
 
-      const [idData, error] = await client.hospitalization
-        .getHospitalizationOfId({
+      const [idData, error] =
+        await client.hospitalization.getHospitalizationOfId({
           // @ts-expect-error data can be null but we want to test it
           id: data[0]["id"],
         });
