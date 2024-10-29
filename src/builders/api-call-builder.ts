@@ -4,7 +4,7 @@ import { createQueryParams, type QueryParams } from "../common/api.ts";
 export default class ApiCallBuilder<T> {
   private readonly token: string;
   private readonly getApi: typeof getApi;
-  private endpoint: string;
+  private endpoint?: string;
   private queryParams?: QueryParams;
   private id?: string;
 
@@ -15,7 +15,7 @@ export default class ApiCallBuilder<T> {
   }) {
     this.token = token;
     this.getApi = getApi;
-    this.endpoint = "";
+    this.endpoint = undefined;
     this.id = undefined;
     this.queryParams = undefined;
   }
@@ -38,12 +38,12 @@ export default class ApiCallBuilder<T> {
   public async build(): Promise<[T, null] | [null, GetApiError]> {
     let queryParams: URLSearchParams | undefined;
 
-    if (typeof this.queryParams !== "undefined") {
-      queryParams = createQueryParams(this.queryParams);
-    }
-
     if (typeof this.endpoint === "undefined") {
       throw new Error("Property endpoint has to have a defined value!");
+    }
+
+    if (typeof this.queryParams !== "undefined") {
+      queryParams = createQueryParams(this.queryParams);
     }
 
     if (typeof this.id !== "undefined") {
