@@ -20,8 +20,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v2
         with:
-          deno-version: v2.x:w
-
+          deno-version: v2.x
 
       - name: Format
         run: deno fmt
