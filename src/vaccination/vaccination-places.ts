@@ -57,7 +57,9 @@ export default class VaccinationPlaces {
       ]).build();
   }
 
-  public async getVaccinationPlacesOfIdV3({ id }: { id: string }) {
+  public async getVaccinationPlacesOfIdV3(
+    { id }: { id: string },
+  ): Promise<[VaccinationPlacesItem, null] | [null, GetApiError]> {
     return await new ApiCallBuilder<VaccinationPlacesItem>({
       token: this.token,
     })

@@ -3,6 +3,7 @@ import Incidence from "../incidence/incidence.ts";
 import BasicOverview from "../basic-overview/basic-overview.ts";
 import Deaths from "../deaths/deaths.ts";
 import VaccinationAggregated from "../vaccination/vaccination-aggregated.ts";
+import VaccinationPlaces from "../vaccination/vaccination-places.ts";
 
 /**
  * Represents single entrypoint for calling supported
@@ -21,6 +22,8 @@ export default class Client {
   public readonly deaths: Deaths;
   /** @property vaccinationAggregated - represents instance of the VaccinationAggregated class  */
   public readonly vaccinationAggregated: VaccinationAggregated;
+  /** @property vaccinationPlaces - represents instance of the VaccinationPlaces class */
+  public readonly vaccinationPlaces: VaccinationPlaces;
 
   /**
    * Represents single entrypoint for calling the supported
@@ -41,6 +44,7 @@ export default class Client {
     this.basicOverview = new BasicOverview(this.token);
     this.deaths = new Deaths(this.token);
     this.vaccinationAggregated = new VaccinationAggregated(this.token);
+    this.vaccinationPlaces = new VaccinationPlaces(this.token);
   }
 
   /**
