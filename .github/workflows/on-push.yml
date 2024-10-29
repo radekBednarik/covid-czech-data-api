@@ -6,7 +6,7 @@ on:
       - '**' 
 
 permissions:
-  contents: write 
+  contents: write
 
 jobs:
   format:
@@ -15,11 +15,14 @@ jobs:
     steps:
       - name: Setup repo
         uses: actions/checkout/@v4
+        with:
+          token: ${{secrets.PAT-ALLOW-WF-MOD}}
 
       - name: Setup Deno
         uses: denoland/setup-deno@v2
         with:
-          deno-version: v2.x
+          deno-version: v2.x:w
+          
 
       - name: Format
         run: deno fmt
