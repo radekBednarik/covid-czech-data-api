@@ -20,4 +20,10 @@ export const queryParamsMap = {
   zarizeniKod: "zarizeni_kod",
   zarizeniNazev: "zarizeni_nazev",
   poradiDavky: "poradi_davky",
+  zrizovatelKod: "zrizovatel_kod",
+  zrizovatelNazev: "zrizovatel_nazev",
+  provozZahajen: "provoz_zahajen",
+  praktickyLekar: "prakticky_lekar",
+  praktickyLekarDeti: "prakticky_lekar_deti",
+  praktickyLekarDospeli: "prakticky_lekar_dospeli",
 } as { [key: string]: string };
