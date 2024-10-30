@@ -5,6 +5,7 @@ import Deaths from "../deaths/deaths.ts";
 import VaccinationAggregated from "../vaccination/vaccination-aggregated.ts";
 import VaccinationPlaces from "../vaccination/vaccination-places.ts";
 import VaccinationFacilities from "../vaccination/vaccination-facilities.ts";
+import VaccinationDeaths from "../vaccination/vaccination-deaths.ts";
 
 /**
  * Represents single entrypoint for calling supported
@@ -29,6 +30,8 @@ export default class Client {
   public readonly vaccinationPlaces: VaccinationPlaces;
   /** @property vaccinationFacilities - represents instance of the VaccinationFacilities class */
   public readonly vaccinationFacilities: VaccinationFacilities;
+  /** @property vaccinationDeaths - represents instance of the VaccinationDeaths class */
+  public readonly vaccinationDeaths: VaccinationDeaths;
   /** @property instance - holds the singleton instance of the class */
   private static instance: Client;
 
@@ -53,6 +56,7 @@ export default class Client {
     this.vaccinationAggregated = new VaccinationAggregated(this.token);
     this.vaccinationPlaces = new VaccinationPlaces(this.token);
     this.vaccinationFacilities = new VaccinationFacilities(this.token);
+    this.vaccinationDeaths = new VaccinationDeaths(this.token);
   }
 
   /**
