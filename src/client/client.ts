@@ -5,7 +5,9 @@ import Deaths from "../deaths/deaths.ts";
 import VaccinationAggregated from "../vaccination/vaccination-aggregated.ts";
 import VaccinationPlaces from "../vaccination/vaccination-places.ts";
 
-import { getLogger, type Logger } from "@logtape/logtape";
+import { getLogger } from "@logtape/logtape";
+
+const logger = getLogger(["@bedna/czech-covid-data-api-lib", "client"]);
 
 /**
  * Represents single entrypoint for calling supported
@@ -30,8 +32,6 @@ export default class Client {
   public readonly vaccinationPlaces: VaccinationPlaces;
   /** @property instance - holds the singleton instance of the class */
   private static instance: Client;
-  /** @property logger - holds instance of the logger */
-  private logger: Logger;
 
   /**
    * Represents single entrypoint for calling the supported
@@ -45,7 +45,6 @@ export default class Client {
    * @param param0.token - your personal token
    */
   private constructor({ token }: { token?: string }) {
-    this.logger = getLogger(["czech-covid-data-api-lib", "client"]);
     this.token = this.addToken(token);
 
     this.hospitalization = new Hospitalizations(this.token);
@@ -64,12 +63,12 @@ export default class Client {
    */
   private addToken(token?: string) {
     if (typeof token === "string") {
-      Client.instance.logger.debug(
+      logger.debug(
         "Token of valid type string was provided and will be returned.",
       );
       return token;
     }
-    Client.instance.logger.fatal(
+    logger.fatal(
       "Provided token was not of type string. Method will throw.",
       { method: "addToken" },
     );
@@ -82,13 +81,13 @@ export default class Client {
     }
     if (!Client.instance) {
       Client.instance = new Client({ token });
-      Client.instance.logger.debug(
+      logger.debug(
         "Client instance was not found. New instance was created.",
         { method: "getInstance" },
       );
     }
 
-    Client.instance.logger.debug(
+    logger.debug(
       "Client instance exists and will be returned.",
       { method: "getInstance" },
     );

@@ -1,7 +1,7 @@
 import { queryParamsMap } from "./utils.ts";
 import { getLogger } from "@logtape/logtape";
 
-const logger = getLogger(["czech-covid-data-api-lib", "api"]);
+const logger = getLogger(["@bedna/czech-covid-data-api-lib", "api"]);
 export type QueryParams = Array<
   Record<string, string | string[] | number | number[] | undefined>
 >;

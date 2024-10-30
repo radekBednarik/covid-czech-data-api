@@ -1,9 +1,11 @@
 import ApiCallBuilder from "../builders/api-call-builder.ts";
 import type { GetApiError } from "../common/api.ts";
+import { getLogger, type Logger } from "@logtape/logtape";
 
 export default class BasicOverview {
   /**@property token - API token */
   private readonly token: string;
+  private logger: Logger;
 
   /**
    * Represents all methods for getting data of `zakladni-prehled`
@@ -14,6 +16,10 @@ export default class BasicOverview {
    */
   constructor(token: string) {
     this.token = token;
+    this.logger = getLogger([
+      "@bedna/czech-covid-data-api-lib",
+      "BasicOverview",
+    ]);
   }
 
   /**
@@ -32,7 +38,11 @@ export default class BasicOverview {
     itemsPerPage?: number;
     properties?: string[];
   } = {}): Promise<[BasicOverviewItemArr, null] | [null, GetApiError]> {
-    return await new ApiCallBuilder<BasicOverviewItemArr>({
+    this.logger.debug("Attempting to fetch API endpoint.", {
+      method: "getBasicOverviewV3",
+      data: { page, itemsPerPage, properties },
+    });
+    const result = await new ApiCallBuilder<BasicOverviewItemArr>({
       token: this.token,
     })
       .provideEndpoint("/api/v3/zakladni-prehled").provideQueryParams([
@@ -40,6 +50,12 @@ export default class BasicOverview {
         { itemsPerPage },
         { properties },
       ]).build();
+
+    this.logger.debug("Api call returned:", {
+      data: { data: result[0], error: result[1] },
+    });
+
+    return result;
   }
 
   /**
@@ -52,11 +68,21 @@ export default class BasicOverview {
   public async getBasicOverviewOfDayV3(
     { date }: { date: string },
   ): Promise<[BasicOverviewItem, null] | [null, GetApiError]> {
-    return await new ApiCallBuilder<BasicOverviewItem>({
+    this.logger.debug("Attempting to fetch API endpoint.", {
+      method: "getBasicOverviewOfDayV3",
+      data: { date },
+    });
+    const result = await new ApiCallBuilder<BasicOverviewItem>({
       token: this.token,
     })
       .provideEndpoint("/api/v3/zakladni-prehled").provideId(date)
       .build();
+
+    this.logger.debug("Api call returned:", {
+      data: { data: result[0], error: result[1] },
+    });
+
+    return result;
   }
 }
 

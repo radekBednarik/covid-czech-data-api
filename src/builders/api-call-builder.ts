@@ -15,7 +15,10 @@ export default class ApiCallBuilder<T> {
   }: {
     token: string;
   }) {
-    this.logger = getLogger(["czech-covid-data-api-lib", "api-call-builder"]);
+    this.logger = getLogger([
+      "@bedna/czech-covid-data-api-lib",
+      "api-call-builder",
+    ]);
     this.token = token;
     this.getApi = getApi;
     this.endpoint = undefined;
