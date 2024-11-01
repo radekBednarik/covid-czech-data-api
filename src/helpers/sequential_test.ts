@@ -10,8 +10,8 @@ describe("helpers", () => {
     client = Client.getInstance({ token: Deno.env.get("CLIENT_TOKEN") });
   });
 
-  describe("call sequentially same api endpoint - hospitalizations", () => {
-    it("happy - should return data of all called pages", async () => {
+  describe("call sequentially same api endpoint", () => {
+    it("happy - hospitalizations - should return data of all called pages", async () => {
       const result = await client.helpers.sequential.callEndpoint(
         client.hospitalization.getHospitalizationsV3,
         { pages: { start: 1, end: 10 }, itemsPerPage: 1 },
@@ -19,6 +19,19 @@ describe("helpers", () => {
 
       expect(result).toBeInstanceOf(Array);
       expect(result).toHaveLength(10);
+      expect(result[0]).toBeInstanceOf(Array);
+      expect(result[0][1]).toBeNull();
+      expect(result[0][0]).toHaveLength(1);
+    });
+
+    it("happy - deaths - should return data of all called pages", async () => {
+      const result = await client.helpers.sequential.callEndpoint(
+        client.deaths.getDeathsV3,
+        { pages: { start: 5, end: 20 }, itemsPerPage: 1 },
+      );
+
+      expect(result).toBeInstanceOf(Array);
+      expect(result).toHaveLength(16);
       expect(result[0]).toBeInstanceOf(Array);
       expect(result[0][1]).toBeNull();
       expect(result[0][0]).toHaveLength(1);
