@@ -23,7 +23,7 @@ export default class BasicOverview {
    * @param param0.itemsPerPage
    * @param param0.properties
    */
-  public async getBasicOverviewV3({
+  public getBasicOverviewV3 = async ({
     page = 1,
     itemsPerPage = 100,
     properties,
@@ -31,7 +31,7 @@ export default class BasicOverview {
     page?: number;
     itemsPerPage?: number;
     properties?: string[];
-  } = {}): Promise<[BasicOverviewItemArr, null] | [null, GetApiError]> {
+  } = {}): Promise<[BasicOverviewItemArr, null] | [null, GetApiError]> => {
     return await new ApiCallBuilder<BasicOverviewItemArr>({
       token: this.token,
     })
@@ -40,7 +40,7 @@ export default class BasicOverview {
         { itemsPerPage },
         { properties },
       ]).build();
-  }
+  };
 
   /**
    * Handles call to `/api/v3/zakladni-prehled/:date`.

@@ -8,7 +8,7 @@ export default class VaccinationFacilities {
     this.token = token;
   }
 
-  public async getVaccinationFacilitiesV3({
+  public getVaccinationFacilitiesV3 = async ({
     page = 1,
     itemsPerPage = 100,
     properties,
@@ -42,7 +42,7 @@ export default class VaccinationFacilities {
     praktickyLekarDospeli?: boolean;
   } = {}): Promise<
     [VaccinationFacilitiesItemArr, null] | [null, GetApiError]
-  > {
+  > => {
     return await new ApiCallBuilder<VaccinationFacilitiesItemArr>({
       token: this.token,
     }).provideEndpoint(
@@ -64,7 +64,7 @@ export default class VaccinationFacilities {
       { praktickyLekarDeti },
       { praktickyLekarDospeli },
     ]).build();
-  }
+  };
 
   public async getVaccinationFacilitiesOfIdV3(
     { id }: { id: string },

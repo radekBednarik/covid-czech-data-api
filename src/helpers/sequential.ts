@@ -5,9 +5,9 @@ export default class Sequential {
 
   public async callEndpoint<T>(
     handler: (
-      { page, itemsPerPage }: { page: number; itemsPerPage: number },
+      { page, itemsPerPage }: { page: number; itemsPerPage?: number },
     ) => Promise<[T, null] | [null, GetApiError]>,
-    options: { pages: { start: number; end: number }; itemsPerPage: number },
+    options: { pages: { start: number; end: number }; itemsPerPage?: number },
   ) {
     const data: Array<[T, null] | [null, GetApiError]> = [];
 

@@ -8,7 +8,7 @@ export default class VaccinationAggregated {
     this.token = token;
   }
 
-  public async getVaccinationV3({
+  public getVaccinationV3 = async ({
     page = 1,
     itemsPerPage = 100,
     properties,
@@ -34,7 +34,7 @@ export default class VaccinationAggregated {
     vekovaSkupina?: string | string[];
   } = {}): Promise<
     [VaccinationAggregatedItemArr, null] | [null, GetApiError]
-  > {
+  > => {
     return await new ApiCallBuilder<VaccinationAggregatedItemArr>({
       token: this.token,
     })
@@ -51,7 +51,7 @@ export default class VaccinationAggregated {
         { krajNazev },
         { vekovaSkupina },
       ]).build();
-  }
+  };
 
   public async getVaccinationOfIdV3(
     { id }: { id: string },
