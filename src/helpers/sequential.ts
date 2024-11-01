@@ -8,15 +8,15 @@ export default class Sequential {
       { page, itemsPerPage }: { page?: number; itemsPerPage?: number },
     ) => Promise<[T, null] | [null, GetApiError]>,
     options: {
-      pages: { start?: number; end?: number };
+      pages?: { start?: number; end?: number };
       itemsPerPage?: number;
       waitAfterCall?: number;
-    },
+    } = {},
   ): Promise<Array<[T, null] | [null, GetApiError]>> {
     const data: Array<[T, null] | [null, GetApiError]> = [];
 
-    const startPage = options.pages.start || 1;
-    const endPage = options.pages.end || Infinity;
+    const startPage = options.pages?.start || 1;
+    const endPage = options.pages?.end || Infinity;
 
     for (let page = startPage; page <= endPage; page++) {
       const result = await handler({
