@@ -7,7 +7,7 @@ export default class Incidence {
     this.token = token;
   }
 
-  public async getIncidence714CzV3({
+  public getIncidence714CzV3 = async ({
     page = 1,
     itemsPerPage = 100,
     properties,
@@ -23,7 +23,7 @@ export default class Incidence {
     datumAfter?: string;
     datumStrictlyBefore?: string;
     datumStrictlyAfter?: string;
-  } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> {
+  } = {}): Promise<[IncidenceDataItemArr, null] | [null, GetApiError]> => {
     const [data, err] = await new ApiCallBuilder({ token: this.token })
       .provideEndpoint("/api/v3/incidence-7-14-cr").provideQueryParams([
         { page },
@@ -40,7 +40,7 @@ export default class Incidence {
     }
 
     return [data as IncidenceDataItemArr, null];
-  }
+  };
 
   public async getIncidence714CzOfIdV3({
     id,

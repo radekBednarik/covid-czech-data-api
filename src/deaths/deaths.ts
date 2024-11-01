@@ -8,7 +8,7 @@ export default class Deaths {
     this.token = token;
   }
 
-  public async getDeathsV3({
+  public getDeathsV3 = async ({
     page = 1,
     itemsPerPage = 100,
     properties,
@@ -38,7 +38,7 @@ export default class Deaths {
     vekLte?: string;
     pohlavi?: string | string[];
     krajNutsKod?: string;
-  } = {}): Promise<[DeathsItemArr, null] | [null, GetApiError]> {
+  } = {}): Promise<[DeathsItemArr, null] | [null, GetApiError]> => {
     return await new ApiCallBuilder<DeathsItemArr>({
       token: this.token,
     })
@@ -58,7 +58,7 @@ export default class Deaths {
         { pohlavi },
         { krajNutsKod },
       ]).build();
-  }
+  };
 
   public async getDeathsOfIdV3(
     { id }: { id: string },

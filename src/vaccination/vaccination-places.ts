@@ -8,7 +8,7 @@ export default class VaccinationPlaces {
     this.token = token;
   }
 
-  public async getVaccinationPlacesV3({
+  public getVaccinationPlacesV3 = async ({
     page = 1,
     itemsPerPage = 100,
     properties,
@@ -36,7 +36,7 @@ export default class VaccinationPlaces {
     zarizeniKod?: string | string[];
     zarizeniNazev?: string | string[];
     poradiDavky?: 1 | 2 | 3 | number[];
-  } = {}): Promise<[VaccinationPlacesItemArr, null] | [null, GetApiError]> {
+  } = {}): Promise<[VaccinationPlacesItemArr, null] | [null, GetApiError]> => {
     return await new ApiCallBuilder<VaccinationPlacesItemArr>({
       token: this.token,
     })
@@ -55,7 +55,7 @@ export default class VaccinationPlaces {
         { zarizeniNazev },
         { poradiDavky },
       ]).build();
-  }
+  };
 
   public async getVaccinationPlacesOfIdV3(
     { id }: { id: string },

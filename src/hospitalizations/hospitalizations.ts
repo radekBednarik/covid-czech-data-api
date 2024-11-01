@@ -7,7 +7,7 @@ export default class Hospitalizations {
     this.token = token;
   }
 
-  public async getHospitalizationsV3(
+  public getHospitalizationsV3 = async (
     {
       page = 1,
       itemsPerPage = 100,
@@ -25,7 +25,7 @@ export default class Hospitalizations {
       datumAfter?: string;
       datumStrictlyAfter?: string;
     } = {},
-  ): Promise<[HospitalizationsDataItemArr, null] | [null, GetApiError]> {
+  ): Promise<[HospitalizationsDataItemArr, null] | [null, GetApiError]> => {
     return await new ApiCallBuilder<HospitalizationsDataItemArr>({
       token: this.token,
     })
@@ -42,7 +42,7 @@ export default class Hospitalizations {
           { datumStrictlyAfter },
         ],
       ).build();
-  }
+  };
 
   public async getHospitalizationOfId(
     { id }: { id: string },

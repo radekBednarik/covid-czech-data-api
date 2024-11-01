@@ -8,7 +8,7 @@ export default class VaccinationDemographic {
     this.token = token;
   }
 
-  public async getVaccinationDemographicDataV3({
+  public getVaccinationDemographicDataV3 = async ({
     page = 1,
     itemsPerPage = 100,
     properties,
@@ -32,7 +32,7 @@ export default class VaccinationDemographic {
     pohlavi?: "M" | "Z" | ("M" | "Z")[];
   } = {}): Promise<
     [VaccinationDemographicDataItemArr, null] | [null, GetApiError]
-  > {
+  > => {
     return await new ApiCallBuilder<VaccinationDemographicDataItemArr>({
       token: this.token,
     }).provideEndpoint(
@@ -49,7 +49,7 @@ export default class VaccinationDemographic {
       { poradiDavky },
       { pohlavi },
     ]).build();
-  }
+  };
 
   public async getVaccinationDemographicDataOfIdV3(
     { id }: { id: string },

@@ -8,7 +8,7 @@ export default class VaccinationDeaths {
     this.token = token;
   }
 
-  public async getVaccinationDeathsV3({
+  public getVaccinationDeathsV3 = async ({
     page = 1,
     itemsPerPage = 100,
     properties,
@@ -24,7 +24,7 @@ export default class VaccinationDeaths {
     datumStrictlyBefore?: string;
     datumAfter?: string;
     datumStrictlyAfter?: string;
-  } = {}): Promise<[VaccinationDeathsItemArr, null] | [null, GetApiError]> {
+  } = {}): Promise<[VaccinationDeathsItemArr, null] | [null, GetApiError]> => {
     return await new ApiCallBuilder<VaccinationDeathsItemArr>({
       token: this.token,
     }).provideEndpoint("/api/v3/ockovani-umrti").provideQueryParams([
@@ -36,7 +36,7 @@ export default class VaccinationDeaths {
       { datumAfter },
       { datumStrictlyAfter },
     ]).build();
-  }
+  };
 
   public async getVaccinationDeathsOfIdV3(
     { id }: { id: string },
