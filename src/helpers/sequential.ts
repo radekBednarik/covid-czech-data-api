@@ -3,7 +3,7 @@ import type { GetApiError } from "../common/api.ts";
 export default class Sequential {
   constructor() {}
 
-  public async call<T>(
+  public async callEndpoint<T>(
     handler: (
       { page, itemsPerPage }: { page: number; itemsPerPage: number },
     ) => Promise<[T, null] | [null, GetApiError]>,

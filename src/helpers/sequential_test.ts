@@ -12,7 +12,7 @@ describe("helpers", () => {
 
   describe("call sequentially same api endpoint - hospitalizations", () => {
     it("happy - should return data of all called pages", async () => {
-      const result = await client.helpers.sequential.call(
+      const result = await client.helpers.sequential.callEndpoint(
         client.hospitalization.getHospitalizationsV3,
         { pages: { start: 1, end: 10 }, itemsPerPage: 1 },
       );
