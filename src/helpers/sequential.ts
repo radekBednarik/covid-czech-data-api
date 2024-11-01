@@ -12,7 +12,7 @@ export default class Sequential {
       itemsPerPage?: number;
       waitAfterCall?: number;
     },
-  ) {
+  ): Promise<Array<[T, null] | [null, GetApiError]>> {
     const data: Array<[T, null] | [null, GetApiError]> = [];
 
     const startPage = options.pages.start || 1;
