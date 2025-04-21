@@ -1,6 +1,6 @@
 {
   "name": "@bedna/czech-covid-data-api-lib",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "exports": "./src/index.ts",
   "license": "MIT",
   "tasks": {
@@ -8,7 +8,12 @@
     "run-tests": "deno test --allow-read --allow-env --allow-net"
   },
   "publish": {
-    "include": ["src/", "deno.json", "deno.lock", "README.md"]
+    "include": [
+      "src/",
+      "deno.json",
+      "deno.lock",
+      "README.md"
+    ]
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@^1.0.12",
@@ -17,11 +22,19 @@
     "@std/testing": "jsr:@std/testing@^1.0.11"
   },
   "lint": {
-    "include": ["src/"],
-    "exclude": ["test/"],
+    "include": [
+      "src/"
+    ],
+    "exclude": [
+      "test/"
+    ],
     "rules": {
-      "tags": ["recommended"],
-      "exclude": ["no-explicit-any"]
+      "tags": [
+        "recommended"
+      ],
+      "exclude": [
+        "no-explicit-any"
+      ]
     }
   },
   "fmt": {
